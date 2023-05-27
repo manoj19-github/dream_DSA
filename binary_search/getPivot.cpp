@@ -6,7 +6,7 @@
 using namespace std;
 
 int findPivot(vector<int>vec) {
-	int s = 0, e = vec.size();
+	int s = 0, e = vec.size()-1;
 	int mid = s + (e - s) / 2;
 	while (s < e) {
 		if (vec[mid] >= vec[0]) {
