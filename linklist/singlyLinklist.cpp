@@ -16,10 +16,13 @@ public:
 };
 
 
-
-void addLast(int data, Node* head) {
+void addLast(int data, Node** head) {
 	Node* newNode = new Node(data);
-	Node* temp = head;
+	Node* temp = *head;
+	if (*head == NULL) {
+		*head = newNode;
+		return;
+	}
 	while (temp->next != NULL) temp = temp->next;
 	temp->next = newNode;
 }
@@ -40,7 +43,7 @@ void addAtPos(int data, int pos, Node** head) {
 	Node* temp = *head;
 	Node* temp2 = *head;
 
-	while (count < pos-1 && temp != NULL) {
+	while (count < pos - 1 && temp != NULL) {
 
 		temp2 = temp;
 		temp = temp->next;
@@ -51,20 +54,6 @@ void addAtPos(int data, int pos, Node** head) {
 	temp2->next = newNode;
 
 
-}
-
-void printNodes(Node* head) {
-	Node* temp = NULL;
-	temp = head;
-	cout << endl << "Nodes : " << endl << endl;
-	while (temp != NULL) {
-		cout << temp->data << " ";
-		temp = temp->next;
-	}
-
-
-	temp = NULL;
-	delete temp;
 }
 
 Node* deleteFirst(Node* head) {
@@ -93,7 +82,7 @@ void deleteLast(Node* head) {
 	delete temp;
 }
 
-void deletePos(int pos,Node* head) {
+void deletePos(int pos, Node* head) {
 	Node* temp = head;
 	Node* temp2 = head;
 	int count = 0;
@@ -109,6 +98,35 @@ void deletePos(int pos,Node* head) {
 }
 
 
+void printNodes(Node* head) {
+	Node* temp = NULL;
+	temp = head;
+	cout << endl << "Nodes : " << endl << endl;
+	while (temp != NULL) {
+		cout << temp->data << " ";
+		temp = temp->next;
+	}
+
+
+	temp = NULL;
+	delete temp;
+}
+
+Node* deleteAllNode(Node* head) {
+	Node* temp = head;
+	while (temp != NULL) {
+
+		temp = temp->next;
+		head = NULL;
+		delete head;
+		head = temp;
+	}
+	temp = NULL;
+	delete temp;
+	return head;
+
+}
+
 void main() {
 	Node* head = NULL;
 	head = addFirst(10, head);
@@ -119,7 +137,7 @@ void main() {
 	head = addFirst(530, head);
 	head = addFirst(40, head);
 
-	addLast(50, head);
+	addLast(50, &head);
 	addAtPos(25, 3, &head);
 	printNodes(head);
 	head = deleteFirst(head);
@@ -131,8 +149,12 @@ void main() {
 
 	cout << endl;
 	printNodes(head);
+	head = deleteAllNode(head);
+	cout << endl << "All Node delete" << endl;
+	printNodes(head);
 
-	
+
+
 }
 
 
