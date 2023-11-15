@@ -28,30 +28,7 @@ void addLast(int data, Node** head) {
 	temp->next = newNode;
 }
 
-Node* reverseList(Node* head) {
-	Node* temp = NULL;
-	Node* temp2 = NULL;
-	while (head != NULL) {
-		temp2 = head->next;
-		head->next = temp;
-		temp = head;
-		head = temp2;
-	}
-	head = temp;
-	return head;
-}
-void reverseList2(Node** head) {
-	Node* forward = NULL;
-	Node* curr = *head;
-	Node* prev = NULL;
-	while (curr != NULL) {
-		forward = curr->next;
-		curr->next = prev;
-		prev = curr;
-		curr = forward;
-	}
-	*head = prev;
-}
+
 void printNodes(Node* head) {
 	Node* temp = NULL;
 	temp = head;
@@ -66,6 +43,25 @@ void printNodes(Node* head) {
 	delete temp;
 }
 
+Node* findMiddle(Node* head) {
+	
+	if (head == NULL || head->next == NULL) return head;
+	if (head->next->next == NULL) return head->next;
+
+	Node* first = head->next;
+	Node* slow = head;
+	while (first != NULL) {
+		first = first->next;
+		if (first) {
+			first = first->next;
+		}
+		slow = slow->next;
+
+
+	}
+
+	return slow;
+}
 
 void main() {
 	Node* head = NULL;
@@ -78,11 +74,11 @@ void main() {
 	addLast(80, &head);
 	addLast(90, &head);
 	addLast(510, &head);
+	Node* middle = findMiddle(head);
 	printNodes(head);
-	head = reverseList(head);
-	printNodes(head);
-	reverseList2(&head);
-	printNodes(head);
+	cout << endl << "Middle Node is : " << endl;
+	cout << middle->data;
+
 
 
 

@@ -28,30 +28,7 @@ void addLast(int data, Node** head) {
 	temp->next = newNode;
 }
 
-Node* reverseList(Node* head) {
-	Node* temp = NULL;
-	Node* temp2 = NULL;
-	while (head != NULL) {
-		temp2 = head->next;
-		head->next = temp;
-		temp = head;
-		head = temp2;
-	}
-	head = temp;
-	return head;
-}
-void reverseList2(Node** head) {
-	Node* forward = NULL;
-	Node* curr = *head;
-	Node* prev = NULL;
-	while (curr != NULL) {
-		forward = curr->next;
-		curr->next = prev;
-		prev = curr;
-		curr = forward;
-	}
-	*head = prev;
-}
+
 void printNodes(Node* head) {
 	Node* temp = NULL;
 	temp = head;
@@ -64,6 +41,22 @@ void printNodes(Node* head) {
 
 	temp = NULL;
 	delete temp;
+}
+
+//  reverse linked list using recursive approach
+void reverseList(Node** head, Node* curr, Node* prev) {
+    if(*head==NULL || (*head)->next == NULL ) return;
+	if (curr == NULL) {
+		*head = prev;
+		return;
+	}
+	reverseList(head, curr->next, curr);
+	curr->next = prev;
+}
+void recursivelyReverse(Node** head) {
+	Node* curr = *head;
+	Node* prev = NULL;
+	reverseList(head, curr, prev);
 }
 
 
@@ -79,9 +72,7 @@ void main() {
 	addLast(90, &head);
 	addLast(510, &head);
 	printNodes(head);
-	head = reverseList(head);
-	printNodes(head);
-	reverseList2(&head);
+	recursivelyReverse(&head);
 	printNodes(head);
 
 
