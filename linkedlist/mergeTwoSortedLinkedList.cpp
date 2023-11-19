@@ -46,9 +46,7 @@ void printNodes(Node* head) {
 
 
 void mergeTwoSortedLinkedList(Node **first,Node **second) {
-	if (first == NULL && second == NULL) return;
-	if (first == NULL) return;
-	if (second == NULL) return;
+	if (*first == NULL || *second == NULL) return;
 	Node* curr1 = *first;
 	Node* curr2 = *second;
 	Node* next1 = (*first)->next;
