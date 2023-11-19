@@ -7,33 +7,69 @@ using namespace std;
 
 
 
-int partition(int arr[], int start, int end) {
+// int partition(int arr[], int start, int end) {
 
+//     int pivotItem = arr[start];
+//     int leftCount = 0;
+//     for (int i = start+1; i <= end; i++) {
+//         if (pivotItem <= arr[i])
+//         leftCount++;
+//     }
+//     int pivotIndex = start + leftCount;
+//     int temp = arr[pivotIndex];
+//     arr[pivotIndex] = arr[start];
+//     arr[start] = arr[pivotIndex];
+//     int ptr1 = start, ptr2 = end;
+//     while (ptr1<pivotIndex && ptr2>pivotIndex) {
+//         while (arr[ptr1] <= pivotItem) {
+//             ptr1++;
+//         }
+//         while (arr[ptr2] >= pivotItem) {
+
+//             ptr2--;
+//         }
+//         if (ptr1<pivotIndex && ptr2>pivotIndex) {
+//             int temp = arr[ptr1];
+//             arr[ptr1] = arr[ptr2];
+//             arr[ptr2] = temp;
+//             ptr1++;
+//             ptr2--;
+//         }
+//     }
+//     return pivotIndex;
+// }
+// void quickSort(int arr[], int start, int end) {
+//     if (start >= end) return;
+//     int pivot = partition(arr, start, end);
+//     quickSort(arr, start, pivot - 1);
+//     quickSort(arr, pivot + 1,end);
+
+// }
+
+int partition(int arr[], int start, int end) {
     int pivotItem = arr[start];
     int leftCount = 0;
     for (int i = start+1; i <= end; i++) {
-        if (pivotItem <= arr[i])
-        leftCount++;
+        if ( arr[i]<=pivotItem) leftCount++;
+
     }
     int pivotIndex = start + leftCount;
-    int temp = arr[pivotIndex];
-    arr[pivotIndex] = arr[start];
+    int temp = arr[start];
     arr[start] = arr[pivotIndex];
+    arr[pivotIndex] = temp;
     int ptr1 = start, ptr2 = end;
     while (ptr1<pivotIndex && ptr2>pivotIndex) {
-        while (arr[ptr1] <= pivotItem) {
+        while (arr[ptr1] < pivotItem) {
             ptr1++;
         }
-        while (arr[ptr2] >= pivotItem) {
-            
-            ptr2--;
-        }
+        while (arr[ptr2] > pivotItem) ptr2--;
         if (ptr1<pivotIndex && ptr2>pivotIndex) {
             int temp = arr[ptr1];
             arr[ptr1] = arr[ptr2];
             arr[ptr2] = temp;
             ptr1++;
             ptr2--;
+
         }
     }
     return pivotIndex;
@@ -42,7 +78,7 @@ void quickSort(int arr[], int start, int end) {
     if (start >= end) return;
     int pivot = partition(arr, start, end);
     quickSort(arr, start, pivot - 1);
-    quickSort(arr, pivot + 1,end);
+    quickSort(arr, pivot + 1, end);
 
 }
 

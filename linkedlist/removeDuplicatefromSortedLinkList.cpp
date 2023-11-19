@@ -42,50 +42,27 @@ void printNodes(Node* head) {
 	temp = NULL;
 	delete temp;
 }
-
-
-Node* findMiddle(Node* head) {
-	
-	if (head == NULL || head->next == NULL) return head;
-	if (head->next->next == NULL) return head->next;
-
-	Node* first = head->next;
-	Node* slow = head;
-	while (first != NULL) {
-		first = first->next;
-		if (first) {
-			first = first->next;
-		}
-		slow = slow->next;
-
-
-	}
-
-	return slow;
-}
-
-// reverse k group 
-Node* reverseKGroup(Node* head, int k) {
-	// base case 
+Node* uniqueSortedList(Node* head) {
 	if (head == NULL) return NULL;
-
-	// step1: reverse first k nodes
-	Node* next = NULL;
+	// non empty list 
 	Node* curr = head;
-	Node* prev = NULL;
-	int count = 0;
-	while (curr != NULL && count < k) {
-		next = curr->next;
-		curr->next = prev;
-		prev = curr;
-		curr = next;
-		count++;
+	while (curr != NULL) {
+		if (curr->next != NULL && curr->data == curr->next->data) {
+			Node* temp = curr->next;
+			curr->next = curr->next->next;
+			temp = NULL;
+			delete temp;
+		}
+		else
+		{
+			curr = curr->next;
+		}
+
 	}
-	if (next != NULL) {
-		head->next = reverseKGroup(next, k);
-	}
-	return prev;
+	return head;
 }
+
+Node *
 
 
 void main() {
@@ -93,21 +70,15 @@ void main() {
 	addLast(50, &head);
 	addLast(10, &head);
 	addLast(20, &head);
-	addLast(30, &head);
+	addLast(20, &head);
 	addLast(40, &head);
 	addLast(60, &head);
 	addLast(80, &head);
 	addLast(90, &head);
 	addLast(510, &head);
-	Node* middle = findMiddle(head);
 	printNodes(head);
-	reverseKGroup(head,2);
+	head = uniqueSortedList(head);
 	printNodes(head);
-
-
-
-
-
 }
 
 
