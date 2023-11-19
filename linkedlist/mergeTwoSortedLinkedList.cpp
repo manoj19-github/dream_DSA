@@ -45,8 +45,9 @@ void printNodes(Node* head) {
 }
 
 
-void mergeTwoSortedLinkedList(Node **first,Node **second) {
-	if (*first == NULL || *second == NULL) return;
+void mergeTwoSortedLinkedList(Node** first, Node** second) {
+	if (*first == NULL) first = second;
+	if (*second == NULL) return;
 	Node* curr1 = *first;
 	Node* curr2 = *second;
 	Node* next1 = (*first)->next;
@@ -86,15 +87,15 @@ void main() {
 	addLast(50, &first);
 	addLast(30, &second);
 	addLast(51, &first);
-	cout <<endl<< "First List is : " << endl;
+	cout << endl << "First List is : " << endl;
 	printNodes(first);
-	cout <<endl<< "second List is : " << endl;
+	cout << endl << "second List is : " << endl;
 	printNodes(second);
 	mergeTwoSortedLinkedList(&first, &second);
 	cout << endl << "Merge List is :" << endl;
 	printNodes(first);
-	
-	
+
+
 }
 
 
