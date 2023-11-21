@@ -82,7 +82,7 @@ Node* addTwoList(Node* head1, Node* head2) {
 
 }
 
-
+// 4239 + 594 = 4833
 void main() {
 	Node* head1 = NULL;
 	Node* head2 = NULL;
@@ -93,11 +93,11 @@ void main() {
 	addLast(5, &head2);
 	addLast(9, &head2);
 	addLast(4, &head2);
-	 head1 = reverse(head1);
-	 head2 = reverse(head2);
-	 Node* result = addTwoList(head1, head2);
-	 result = reverse(result);
-	 printNodes(result);
+	head1 = reverse(head1);
+	head2 = reverse(head2);
+	Node* result = addTwoList(head1, head2);
+	result = reverse(result);
+	printNodes(result);
 }
 
 
