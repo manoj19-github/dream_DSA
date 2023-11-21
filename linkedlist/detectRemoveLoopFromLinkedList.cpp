@@ -43,7 +43,7 @@ void printNodes(Node* head) {
 	delete temp;
 }
 
-// Detect floyed loop using floyed alogrithm
+// Detect  loop using floyed alogrithm
 
 Node* floyedDetectLoop(Node* head) {
 	Node* slow = head;

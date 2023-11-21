@@ -35,9 +35,6 @@ vector<int>sumOfArray(vector<int>arr1,vector<int>arr2) {
 		i--;
 		j--;
 	}
-	for (int i : ans) {
-
-	}
 	while (i >= 0) {
 		
 		int sum =arr1[i] + carry;
