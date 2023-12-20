@@ -11,57 +11,54 @@
 
 using namespace std;
 
-vector<int>prevSmallerElement(vector<int>arr) {
-    int arLength = arr.size();
-    stack<int> stk;
-    stk.push(-1);
-    vector<int>ans(arLength);
-    for (int i = 0; i < arLength; i++) {
-        int curr = arr[i];
-        while (stk.top() != -1 && arr[stk.top()] >= curr) stk.pop();
-        ans[i] = stk.top();
-        stk.push(i);
-    }
-    return ans;
-}
-
 vector<int>nextSmallerElement(vector<int>arr) {
-    int arLength = arr.size();
-    stack<int> stk;
+    stack<int>stk;
+    vector<int>ans(arr.size());
     stk.push(-1);
-    vector<int>ans(arLength);
-    for (int i = arLength - 1; i >= 0; i--) {
+    for (int i = arr.size() - 1; i >= 0; i--) {
+        int curr = arr[i];
+        while (stk.top() != -1 && arr[stk.top()] >= curr)stk.pop();
+        ans[i] = stk.top();
+        stk.push(i);
+
+    }
+    return ans;
+
+}
+vector<int>prevSmalllerElement(vector<int>arr) {
+    stack<int>stk;
+    vector<int>ans(arr.size());
+    stk.push(-1);
+    for (int i = 0; i < arr.size(); i++) {
         int curr = arr[i];
         while (stk.top() != -1 && arr[stk.top()] >= curr) stk.pop();
         ans[i] = stk.top();
         stk.push(i);
+
     }
     return ans;
+
 }
-
-
-int largestRectangleArea(vector<int>& heights) {
-    int n = heights.size();
-    vector<int>next(n);
+int largestRectanleArea(vector<int>& heights) {
+    int lengthofHeights = heights.size();
+    vector<int>next(lengthofHeights);
+    vector<int>prev(lengthofHeights);
     next = nextSmallerElement(heights);
-    vector<int>prev(n);
-    prev = prevSmallerElement(heights);
+    prev = prevSmalllerElement(heights);
     int area = INT_MIN;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < lengthofHeights; i++) {
         int l = heights[i];
+        if (next[i] == -1) next[i] = lengthofHeights;
         int b = next[i] - prev[i] - 1;
-        if (next[i] == -1) {
-            next[i] = n;
-        }
         int newArea = l * b;
         area = max(area, newArea);
 
+        
     }
     return area;
 
-    
-    
 }
+
 
 
 
@@ -69,10 +66,8 @@ int largestRectangleArea(vector<int>& heights) {
 int main()
 {
     vector<int>input = { 2,1,5,6,2,3 };
-    int ans = largestRectangleArea(input);
-    cout << "Answer is : " << ans << endl;
-    
-
+    cout << "Answer is : " << largestRectanleArea(input);
+  
 
     
 }
