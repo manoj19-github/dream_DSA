@@ -10,7 +10,7 @@ using namespace std;
 
 // algo
 // first of all split the whole linked list into two sub parts 
-// then reverse one sub list and check both list are same or not if same then it is a palidrom other wise not palindrom
+// then reverse one sub list and check both list are same or not if same then it is a palnidrom other wise not palindrom
 
 
 
