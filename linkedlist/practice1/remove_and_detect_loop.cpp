@@ -10,7 +10,7 @@ public:
 	int data;
 	Node* next;
 	Node(int d = 0) {
-		this->data = d;
+		this- >data = d;
 		this->next = NULL;
 	}
 };
