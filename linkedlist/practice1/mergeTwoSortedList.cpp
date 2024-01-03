@@ -113,50 +113,46 @@ Node* sortZeroOneTwo(Node* head) {
 
 }
 
-Node* solve(Node* first, Node* second) {
-	Node* curr1 = first;
-	Node* curr2 = second;
-	Node* next1 = curr1->next;
-	Node* next2 = curr2->next;
-	while (next1 != NULL && curr2 != NULL) {
-		if (curr2->data >= curr1->data && curr2->data<=next1->data) {
-			curr1->next = curr2;
-			next2 = curr2->next;
-			curr2->next = next1;
-			curr1 = curr2;
-			curr2 = next2;
+Node* solve(Node* lower, Node * higher) {
+	Node* currLower = lower;
+	Node* currHigher = higher;
+	Node* nextLower = lower->next;
+	Node* nextHigher = higher->next;
 
+	while (nextLower != NULL && currHigher != NULL) {
+		if (currHigher->data >= currLower->data && currHigher->data <= nextLower->data) {
+			currLower->next = currHigher;
+			nextHigher = currHigher->next;
+			currHigher->next = nextLower;
+			currLower = currHigher;
+			currHigher = nextHigher;
 		}
 		else {
-			// move curr1 and next1 
-			curr1 = next1;
-			next1 = next1->next;
-			if (next1 == NULL) {
-				curr1->next = curr2;
-				return first;
+			currLower = nextLower;
+			nextLower = nextLower->next;
+			if (nextLower == NULL) {
+				currLower->next = currHigher;
+			
+				return lower;
 			}
 		}
 	}
-	return first;
+
+
+
 }
 
-
-Node* sortTwoLists(Node* first, Node* second) { 
-	if (first == NULL) return second;
-	if (second == NULL) return first;
-
-
-	if (first->data <= second->data) {
-		first = solve(first, second);
+Node* MergeTwoSortedLinkedList(Node* firstHead,Node *secondHead) {
+	if (firstHead == NULL) return secondHead;
+	if (secondHead == NULL) return secondHead;
+	if (firstHead->data <= secondHead->data) {
+		return solve(firstHead, secondHead);
 	}
 	else {
-		first = solve(second, first);
+		return solve(secondHead, firstHead);
 	}
-	return first;
-
 
 }
-
 
 
 void main()
@@ -174,7 +170,7 @@ void main()
 	printNodes(head1);
 	cout << endl << endl;
 	printNodes(head2);
-	head1 = sortTwoLists(head1, head2);
+	head1 = MergeTwoSortedLinkedList(head1, head2);
 	cout << endl << endl;
 	printNodes(head1);
 }
